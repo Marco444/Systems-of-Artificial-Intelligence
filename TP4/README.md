@@ -1,142 +1,139 @@
 
-# TP4 SIA - Aprendizaje No Supervisado
+# TP4 SIA - Unsupervised Learning
 
-## Introducción
+## Introduction
 
-Trabajo práctico orientativo para la materia Sistemas de Inteligencia Artificial con el
-objetivo de implementar diversos algoritmos de aprendizaje no supervisado.
+This is an orientation practical assignment for the course on Artificial Intelligence Systems, with the objective of implementing various unsupervised learning algorithms.
 
-[Enunciado](docs/Enunciado.pdf)
+[Assignment](docs/Enunciado.pdf)
 
-### Requisitos
+### Requirements
 
 - Python3
 - pip3
 - [pipenv](https://pypi.org/project/pipenv/)
 
-### Instalación
+### Installation
 
-Parado en el directorio raiz, ejecutar
+Standing in the root directory, run
 
 ```sh
-pipenv installdd
+pipenv install
 ```
 
-para instalar las dependencias necesarias en el ambiente virtual.
+to install the necessary dependencies in the virtual environment.
 
-
-# Ejercicio 1 - Kohonen
-## Ejecución
+# Exercise 1 - Kohonen
+## Execution
 ### `src/kohonen/main.py`
-El programa `src/kohonen/main.py` ejecuta el algoritmo de Kohonen para resolver el problema de clustering de países.
-Se ejecuta con el siguiente comando:
+The program `src/kohonen/main.py` runs the Kohonen algorithm to solve the country clustering problem.
+It is executed with the following command:
 ```sh
 pipenv run python src/kohonen/main.py [config_file]
 ```
 
 ```json
 {
-  "input": "Archivo CSV de entrada - String",
-  "initial_radius": "Radio inicial - Float",
-  "initial_eta": "Eta inicial - Float",
-  "size": "Tamaño de la red (k) - Int",
-  "variable_radius": "Indica si el radio es variable - Boolean",
-  "variable_eta": "Indica si el eta es variable - Boolean",
-  "mult_iterations": "Cantidad de epocas - Int",
-  "similarity": "Función de similitud - [EUCLIDES, EXP]",
-  "data_initialization": "Indica si los datos se inicializan con los datos - Boolean",
-  "heatmap_title": "Título del gráfico de Heatmap - String",
-  "u_matrix_title": "Título del gráfico de la Matriz U - String"
+  "input": "Input CSV file - String",
+  "initial_radius": "Initial radius - Float",
+  "initial_eta": "Initial eta - Float",
+  "size": "Network size (k) - Int",
+  "variable_radius": "Indicates if the radius is variable - Boolean",
+  "variable_eta": "Indicates if eta is variable - Boolean",
+  "mult_iterations": "Number of epochs - Int",
+  "similarity": "Similarity function - [EUCLIDEAN, EXP]",
+  "data_initialization": "Indicates if data is initialized with the input - Boolean",
+  "heatmap_title": "Title of the Heatmap chart - String",
+  "u_matrix_title": "Title of the U Matrix chart - String"
 }
 ```
 
-#### Resultado
-El programa muestra en pantalla los gráficos Heatmap y Matriz U luego de entrenar el modelo con los datos de entrada.
+#### Result
+The program displays the Heatmap and U Matrix charts after training the model with the input data.
 
 <img src="images/kohonen_heatmap.png" width="1000" alt="Kohonen Heatmap">
 <img src="images/kohonen_umatrix.png" width="1000" alt="Kohonen U-Matrix">
 
 
-# Ejercicio 2 - Componentes Principales
-## Ejecución
+# Exercise 2 - Principal Components
+## Execution
 ### PCA - `src/PCA/main.py`
-El programa `src/PCA/main.py` ejecuta el algoritmo de PCA, utilizando la libreria [scikit-learn](https://scikit-learn.org/stable/)
-Se ejecuta con el siguiente comando:
-````sh
+The program `src/PCA/main.py` runs the PCA algorithm, using the [scikit-learn](https://scikit-learn.org/stable/) library.
+It is executed with the following command:
+```sh
 pipenv run python src/PCA/main.py [config_file]
-````
+```
 
 ```json
 {
-  "input": "Archivo CSV de entrada - String",
-  "n_components": "Cantidad de componentes principales - Int"
+  "input": "Input CSV file - String",
+  "n_components": "Number of principal components - Int"
 }
 ```
 
-#### Resultado
-El programa muestra en pantalla los gráficos de:
-- Boxplot de las variables estandarizadas
+#### Result
+The program displays the following charts:
+- Boxplot of standardized variables
    <br><img src="images/pca_boxplot.png" width="1000" alt="PCA Boxplot"> 
-- Gráfico de barras de PC1 por país
+- Bar chart of PC1 by country
    <br><img src="images/pca_pc1.png" width="1000" alt="PCA PC1">
-- Biplot de PC1 y PC2
+- Biplot of PC1 and PC2
    <br><img src="images/pca_biplot.png" width="1000" alt="PCA Biplot">
 
-También imprime por STDOUT un listado de los países ordenados (ascendentemente) por su valor de PC1.
+It also prints to STDOUT a list of countries sorted (ascending) by their PC1 value.
 
 
 ### Oja - `src/oja/main.py`
-El programa `src/oja/main.py` ejecuta el algoritmo de la regla de Oja, obteniendo el autovector asociado a PC1.
-Se ejecuta con el siguiente comando:
-````sh
+The program `src/oja/main.py` runs the Oja rule algorithm, obtaining the eigenvector associated with PC1.
+It is executed with the following command:
+```sh
 pipenv run python -m src.oja.main [config_file]
-````
+```
 
-````json
+```json
 {
-  "input": "Archivo CSV de entrada - String",
-  "eta": "Eta inicial - Float",
-  "limit": "Cantidad de epocas - Int"
+  "input": "Input CSV file - String",
+  "eta": "Initial eta - Float",
+  "limit": "Number of epochs - Int"
 }
-````
+```
 
-
-#### Resultado
-El programa imprime por STDOUT el autovector asociado a PC1.
+#### Result
+The program prints to STDOUT the eigenvector associated with PC1.
 
 
 ### Sanger - `src/sanger/main.py`
-El programa `src/sanger/main.py` ejecuta el algoritmo de la regla de Sanger, obteniendo los autovectores asociados a las componentes principales.
-Se ejecuta con el siguiente comando:
-````sh
+The program `src/sanger/main.py` runs the Sanger rule algorithm, obtaining the eigenvectors associated with the principal components.
+It is executed with the following command:
+```sh
 pipenv run python -m src.sanger.main [config_file]
-````
+```
 
-````json
+```json
 {
-  "input": "Archivo CSV de entrada - String",
-  "eta": "Eta inicial - Float",
-  "limit": "Cantidad de epocas - Int",
-  "n_components": "Cantidad de componentes principales - Int"
+  "input": "Input CSV file - String",
+  "eta": "Initial eta - Float",
+  "limit": "Number of epochs - Int",
+  "n_components": "Number of principal components - Int"
 }
-````
+```
 
-#### Resultado
-El programa imprime por STDOUT los autovectores asociados a las componentes principales.
+#### Result
+The program prints to STDOUT the eigenvectors associated with the principal components.
 
 
-# Ejercicio 3 - Patrones - Modelo de Hopfield
+# Exercise 3 - Patterns - Hopfield Model
 <img src="images/hopfield_patterns.png" width="1000" alt="Hopfield Patterns">
 
-## Ejecucion
+## Execution
 ### `src/hopfield/main.py`
-Este programa toma un conjunto de patrones a almacenar y un patron que intentara reconocer utilizando el modelo de Hopfield.
-Se ejecuta con el siguiente comando:
+This program takes a set of patterns to store and a pattern to recognize using the Hopfield model.
+It is executed with the following command:
 ```sh
 pipenv run python src/hopfield/main.py [config_file]
 ```
 
-Donde un ejemplo de config_file es el siguiente:
+An example of config_file is the following:
 ```json
 {
   "input": "storedPatterns.txt",
@@ -151,23 +148,22 @@ Donde un ejemplo de config_file es el siguiente:
 }
 ```
 
-- "input" -> Archivo con los patrones a almacenar
-- "try" -> Archivo con el patron a reconocer
-- "size" -> Dimension de la entrada. Debe ser la multiplicacion de ancho y alto.
-- "max_iterations" -> Cantidad de iteraciones maxima en caso de no encontrar un estado repetido previamente
-- "noise" -> Booleano, que determina si se aplicara ruido o no a la entrad
-- "probability_of_noise" -> En caso de que "noise": true, es la probabilidad con la que se alterara una posicion del patron
-- "plot_states" -> Booleano, indica si se quiere hacer un grafico de la evolucion de los estados
-- "plot_energy" -> Booleano, indica si se quiere hacer un grafico de la evolucion de la energia de Hopfield
-- "plot_stored_patterns" -> Booleano, indica si se quiere hacer un grafico de los patrones almacenados
+- "input" -> File with the patterns to store
+- "try" -> File with the pattern to recognize
+- "size" -> Input dimension. It must be the multiplication of width and height.
+- "max_iterations" -> Maximum number of iterations if no previously repeated state is found
+- "noise" -> Boolean, determines whether noise will be applied to the input or not
+- "probability_of_noise" -> If "noise": true, this is the probability that a position in the pattern will be altered
+- "plot_states" -> Boolean, indicates whether to graph the evolution of states
+- "plot_energy" -> Boolean, indicates whether to graph the evolution of Hopfield's energy
+- "plot_stored_patterns" -> Boolean, indicates whether to graph the stored patterns
 
 ### `src/hopfield/analysis.py`
-Este programa toma todos los patrones disponibles, y busca combinaciones de tamaño parametrizable analizando la ortogonalidad entre si.
-Al final, muestra dos graficos, los primeros 25 con menor ortogonalidad promedio y los ultimos 5.
+This program takes all available patterns and looks for combinations of parametrizable size, analyzing the orthogonality between them.
+At the end, it shows two charts: the first 25 with the lowest average orthogonality and the last 5.
 ```sh
 pipenv run python src/hopfield/analysis.py [config_file]
 ```
-
 
 ```json
 {
@@ -178,14 +174,14 @@ pipenv run python src/hopfield/analysis.py [config_file]
   "max_iterations": 100
 }
 ```
-- "input" -> Archivo donde se almacenen todos los patrones
-- "combination_size" -> Tamaño de las combinaciones
-- "size" -> Dimension de la entrada. Debe ser la multiplicacion de ancho y alto.
-- "max_iterations" -> Cantidad de iteraciones maxima en caso de no encontrar un estado repetido previamente
+- "input" -> File where all patterns are stored
+- "combination_size" -> Size of the combinations
+- "size" -> Input dimension. It must be the multiplication of width and height.
+- "max_iterations" -> Maximum number of iterations if no previously repeated state is found
 
 ### `src/hopfield/analysis_multiple_combinations.py`
-Este programa repite el análisis anterior, pero para un rango de tamaño de combinaciones. 
+This program repeats the previous analysis but for a range of combination sizes.
 ```sh
 pipenv run python src/hopfield/analysis_multiple_combinations.py [config_file]
 ```
-Toma el mismo config que el anterior, pero se mostrará un grafico de barras, con la ortogonalidad promedio minima para cada tamaño de combinaciones.
+It takes the same config as the previous one, but a bar chart will be shown, with the minimum average orthogonality for each combination size.
